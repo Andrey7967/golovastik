@@ -73,7 +73,7 @@ class Reptile {
         sinHead = (cursor.y-x1.Segments[x1.Segments.length-1].y)/Math.sqrt((x1.Segments[x1.Segments.length-1].x-cursor.x)**2 + (x1.Segments[x1.Segments.length-1].y-cursor.y)**2);
          if(sinHead<0) {
             
-            ctx.rotate(Math.PI/2+-Math.acos(cosHead));
+            ctx.rotate(Math.PI/2-Math.acos(cosHead));
            
             
         }  else {
@@ -85,16 +85,16 @@ class Reptile {
         this.y = this.Segments[0].y + sin * 2;
         if(Math.abs( this.Segments[this.Segments.length-1].x - targetMove.x) > 20.001) {
             if( this.Segments[this.Segments.length-1].x > targetMove.x) {
-                this.Segments[this.Segments.length-1].x-=80 * this.timeFraction;
+                this.Segments[this.Segments.length-1].x-=80 * this.timeFraction *cos;
             } else {
-                this.Segments[this.Segments.length-1].x+=80 * this.timeFraction;
+                this.Segments[this.Segments.length-1].x+=80 * this.timeFraction * cos;
             }
         }
         if(Math.abs( this.Segments[this.Segments.length-1].y - targetMove.y) > 20.001) {
             if( this.Segments[this.Segments.length-1].y > targetMove.y) {
-                this.Segments[this.Segments.length-1].y-=80* this.timeFraction;
+                this.Segments[this.Segments.length-1].y-=80* this.timeFraction * sin;
             } else {
-                this.Segments[this.Segments.length-1].y+=80* this.timeFraction;
+                this.Segments[this.Segments.length-1].y+=80* this.timeFraction * sin;
             }
         }
         
