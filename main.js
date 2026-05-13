@@ -20,6 +20,8 @@ class Reptile {
     y;
     neighbor;
     current;
+    cosHead;
+    sinHead;
     Segments = [];
     constructor(x,y) {
         this.x =x;
@@ -54,20 +56,11 @@ class Reptile {
     
             
         }
-        let cosHead= (cursor.x-x1.Segments[x1.Segments.length-1].x)/Math.sqrt((x1.Segments[x1.Segments.length-1].x-cursor.x)**2 + (x1.Segments[x1.Segments.length-1].y-cursor.y)**2);
-        let sinHead = (cursor.y-x1.Segments[x1.Segments.length-1].y)/Math.sqrt((x1.Segments[x1.Segments.length-1].x-cursor.x)**2 + (x1.Segments[x1.Segments.length-1].y-cursor.y)**2);
         
         ctx.save();
         ctx.translate(this.Segments[this.Segments.length-1].x,this.Segments[this.Segments.length-1].y );
 
-        if(sinHead<0) {
-            
-            ctx.rotate(Math.PI/2+-Math.acos(cosHead));
-           
-            
-        }  else {
-            ctx.rotate(Math.PI/2+Math.acos(cosHead));
-        }
+       
         
         
         ctx.drawImage(head,-9.5,-33,head.width/5,head.height/5);
@@ -76,7 +69,16 @@ class Reptile {
         
     }
     follow(target,targetMove) {
-        
+        cosHead= (cursor.x-x1.Segments[x1.Segments.length-1].x)/Math.sqrt((x1.Segments[x1.Segments.length-1].x-cursor.x)**2 + (x1.Segments[x1.Segments.length-1].y-cursor.y)**2);
+        sinHead = (cursor.y-x1.Segments[x1.Segments.length-1].y)/Math.sqrt((x1.Segments[x1.Segments.length-1].x-cursor.x)**2 + (x1.Segments[x1.Segments.length-1].y-cursor.y)**2);
+         if(sinHead<0) {
+            
+            ctx.rotate(Math.PI/2+-Math.acos(cosHead));
+           
+            
+        }  else {
+            ctx.rotate(Math.PI/2+Math.acos(cosHead));
+        }
         let cos = (this.Segments[0].x-target.x)/Math.sqrt((this.Segments[0].x-target.x)**2 + (this.Segments[0].y-target.y)**2);
         let sin = (this.Segments[0].y-target.y)/Math.sqrt((this.Segments[0].x-target.x)**2 + (this.Segments[0].y-target.y)**2); 
         this.x = this.Segments[0].x + cos * 2;
@@ -104,6 +106,7 @@ class Reptile {
             this.Segments[i].x = this.Segments[i+1].x + cos * 2;
             this.Segments[i].y = this.Segments[i+1].y + sin * 2;
     }
+    
 } 
  
     addSegment(x,y) {
